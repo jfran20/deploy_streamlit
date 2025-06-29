@@ -1,11 +1,14 @@
 import streamlit as st
 import pandas as pd
-from firebase_admin import firestore
+#from firebase_admin import firestore
+from google.cloud import firestore
+from google.oauth2 import service_account
 import json
 
 key_dict = json.loads(st.secrets['textkey'])
-
-db =  firestore.Client.from_service_account_json(key_dict)
+creds = service_account.Credentials.from_service_account_info(key_dict)
+db = firestore.Client(credentials=creds, project="Streamlit")
+#db =  firestore.Client.from_service_account_json(key_dict)
 ref = list(db.collection(u'movies').stream())
 
 @st.cache_data
