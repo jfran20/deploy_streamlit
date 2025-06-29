@@ -5,7 +5,7 @@ import json
 
 key_dict = json.loads(st.secrets['textkey'])
 
-db =  firestore.Client.from_service_account_json("/content/firebase_keys.json")
+db =  firestore.Client.from_service_account_json(key_dict)
 ref = list(db.collection(u'movies').stream())
 
 @st.cache_data
