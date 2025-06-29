@@ -7,7 +7,7 @@ import json
 
 key_dict = json.loads(st.secrets["textkey"])
 creds = service_account.Credentials.from_service_account_info(key_dict)
-db = firestore.Client(credentials=creds, project="Streamlit")
+db = firestore.Client(credentials=creds, project="streamlit-jfem")
 
 #db =  firestore.Client.from_service_account_json(st.secrets['textkey'])
 ref = list(db.collection(u'movies').stream())
